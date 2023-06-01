@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+    function saveToCSV() {
+      // Retrieve user input values
+      var sname = document.getElementByName('Surname').value;
+      var name = document.getElementByName('First_Names').value;
+      var tel = document.getElementByName('Contact_number').value;
+	  var date = document.getElementByName('Date').value;
+	  var age = document.getElementByName('Age').value;
+
+      // Format data as CSV
+      var csvContent = "Surname,First Names,Contact number,Date,Age\n" + Surname + "," + First_Names + "," + Contact_number + "," + Date + "," + Age;
+
+      // Create a Blob object with the CSV data
+      var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+
+      // Create a download link
+      var link = document.createElement("a");
+      if (link.download !== undefined) {
+        // Set link attributes and simulate a click event
+        var url = URL.createObjectURL(blob);
+        link.setAttribute("href", url);
+        link.setAttribute("download", "user_data.csv");
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    }
+  </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script>
+    function validateForm(event) {
+      event.preventDefault();
+      var food = document.forms[myForm]["food"].value;
+      var q1 = document.forms[myForm]["q1"].value;.value;
+	  var q2 = document.forms[myForm]["q2"].value;
+	  var q3 = document.forms[myForm]["q3"].value;
+	  var q4 = document.forms[myForm]["q4"].value;
+      var foodSelectionError = document.forms[myForm]["foodSelectionError"].value;
+      var q1Error = document.forms[myForm]["q1Error"].value;
+	  var q2Error = document.forms[myForm]["q2Error"].value;
+	  var q3Error = document.forms[myForm]["q3Error"].value;
+	  var q4Error = document.forms[myForm]["q4Error"].value;
+      
+      // Validate checkboxes
+      var isChecked = false;
+      for (var i = 0; i < food.length; i++) {
+        if (food[i].checked) {
+          isChecked = true;
+          break;
+        }
+      }
+      if (!isChecked) {
+        foodSelectionError.textContent = 'Please select at least one favourite food;
+      } else {
+        foodSelectionError.textContent = '';
+      }
+      
+      // If all validations pass, submit the form
+      if (isChecked) {
+        document.getElementById('myForm').submit();
+      }
+	  else {
+      alert("Please select one from the list of your favourite food");
+      }
+    }
+  </script>
+<script>
+    function openfirstScreen() {
+      window.open("C:/Users/user/Downloads/Welcome Page.html", "_blank");
+    }
+  </script>
+<title>Survey</title>
+<style>
+table,th,td{
+	border:1px solid black;
+	border-collapse:collapse;
+}
+th,td{
+	padding:10px;
+	text-alin:center;
+}
+</style>
+</head>
+<body>
+<h1>Take our Survey</h1>
+<p>Personal Details:</p>
+<form id="myForm" onsubmit="validateForm(event); return false;">
+<fieldset>
+Surname: <input type="text" name="surname" required><br>
+First Names: <input type="text" name="first_Names" required><br>
+Contact number: <input type="tel" name="contact_number" required minlength="10" maxlength="10"><br>
+Date: <input type="date" name="date" required min="2023-05-31"><br>
+Age: <input type="number" name="age" required min="18" minlength="1" maxlength="3"><br>
+</fieldset>	
+
+<fieldset>
+<legend>What is your favourite food?(Choose more than 1 answer):</legend>
+	<input type= "checkbox" name="food" value="Pizza"/>Pizza<br>
+	<input type= "checkbox" name="food" value="Pasta"/>Pasta<br>
+	<input type= "checkbox" name="food" value="Pap and wors"/>Pap and wors<br>
+	<input type= "checkbox" name="food" value="Chicken stir fry"/>Chicken stir<br>
+	<input type= "checkbox" name="food" value="Beef stir fry"/>Beef stir fry<br>
+	<input type= "checkbox" name="food" value="Other"/>Other<br>
+<div id="foodSelectionError" class="error"></div>
+</fieldset> 
+
+<p>On a scale of 1 to 5 indicatewhether you strongly agree to strongly disagree</p>
+	<table style="width:100%">
+	<tr>
+		<th></th>
+		<th>Strongly Agree(1)</th>
+		<th>Agree(2)</th>
+		<th>Neutral(3)</th>
+		<th>Disagree(4)</th>
+		<th>Strongly Disagree(5)</th>
+	</tr>
+			 <tr>
+                <td>I like to eat out</td>
+				<td><input type="radio" name="q1" value="Strongly_Agree"></td>
+                <td><input type="radio" name="q1" value="Agree"></td>
+                <td><input type="radio" name="q1" value="Neutral"></td>
+				<td><input type="radio" name="q1" value="Disagree"></td>
+				<td><input type="radio" name="q1" value="Strongly_Disagree"></td>
+				 <div id="q1Error" class="error"></div>
+            </tr>
+             <tr>
+                <td>I like to watch movies</td>
+                <td><input type="radio" name="q2" value="Strongly_Agree"></td>
+                <td><input type="radio" name="q2" value="Agree"></td>
+                <td><input type="radio" name="q2" value="Neutral"></td>
+				<td><input type="radio" name="q2" value="Disagree"></td>
+				<td><input type="radio" name="q2" value="Strongly_Disagree"></td>
+				<div id="q2Error" class="error"></div>
+            </tr>
+             <tr>
+                <td>I like to watch TV</td>
+                <td><input type="radio" name="q3" value="Strongly_Agree"></td>
+                <td><input type="radio" name="q3" value="Agree"></td>
+                <td><input type="radio" name="q3" value="Neutral"></td>
+				<td><input type="radio" name="q3" value="Disagree"></td>
+				<td><input type="radio" name="q3" value="Strongly_Disagree"></td>
+				<div id="q3Error" class="error"></div>
+            </tr>
+			<tr>
+                <td>I like to listen to the radio</td>
+                <td><input type="radio" name="q4" value="Strongly_Agree"></td>
+                <td><input type="radio" name="q4" value="Agree"></td>
+                <td><input type="radio" name="q4" value="Neutral"></td>
+				<td><input type="radio" name="q4" value="Disagree"></td>
+				<td><input type="radio" name="q4" value="Strongly_Disagree"></td>				
+				<div id="q4Error" class="error"></div>
+            </tr>
+     </table>
+	 <input type="submit" value="Submit">  
+	 <button onclick="openfirstScreen()">Welcome Page</button><br><br>
+</form>
+	
+</body>
+</html>
